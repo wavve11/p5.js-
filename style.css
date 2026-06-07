@@ -132,3 +132,52 @@ header p {
 .project-sample4::after { background-color: #8080FF; } /* sample4 보라 (우리 작품) */
 .project-sample2::after { background-color: #FFCC99; } /* sample2 연주황 */
 .project-sample3::after { background-color: #FFCCCC; } /* sample3 연분홍 */
+
+/* style.css 파일의 맨 아래에 추가하세요 */
+
+/* body 전체의 가상 요소를 사용하여 여백을 꾸밉니다. */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  width: 150px; /* 도형이 표시될 여백의 너비 */
+  height: 100vh;
+  z-index: -1; /* 메인 콘텐츠 뒤에 배치 */
+}
+
+/* 1단계: 좌측 여백 꾸미기 */
+body::before {
+  left: 0;
+  /* 칸딘스키 스타일 도형들을 쌓아서 표현 (순서대로 아래에서 위로 쌓임)
+    1) 은은한 격자무늬 (기존 격자와 동일하게)
+    2) 진한 검은색 원 (좌측 하단)
+    3) 파란색 대각선 (좌측 상단에서 중앙으로)
+    4) 빨간색 삼각형 (좌측 중앙)
+  */
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+    radial-gradient(circle at 30px calc(100vh - 100px), #19191920 40px, transparent 80px),
+    linear-gradient(225deg, #0000FF15 0%, #0000FF00 60%),
+    conic-gradient(from 0deg at 70px 40vh, #FF000010 30deg, transparent 60deg);
+  background-size: 10px 10px, 10px 10px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+/* 2단계: 우측 여백 꾸미기 */
+body::after {
+  right: 0;
+  /* 칸딘스키 스타일 도형들을 쌓아서 표현
+    1) 은은한 격자무늬 (기존 격자와 동일하게)
+    2) 노란색 원 (우측 중앙)
+    3) 검은색 얇은 대각선 (우측 하단에서 중앙으로)
+    4) 연보라색 흐릿한 원 (우측 상단)
+  */
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+    radial-gradient(circle at calc(150px - 50px) 50vh, #CCCC0015 60px, transparent 100px),
+    linear-gradient(45deg, #19191910 0%, #19191900 40%),
+    radial-gradient(circle at calc(150px - 30px) 150px, #8080FF10 80px, transparent 120px);
+  background-size: 10px 10px, 10px 10px, 100% 100%, 100% 100%, 100% 100%;
+}
