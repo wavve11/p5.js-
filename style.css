@@ -1,0 +1,129 @@
+/* style.css - 칸딘스키 스타일 포트폴리오 대문 디자인 */
+
+/* 1. 전체적인 페이지 레이아웃 및 칸딘스키 배경 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  
+  /* 칸딘스키 풍 배경: 도화지 질감 + 기하학적 오버레이 */
+  background-color: #F0EEE9; /* 도화지색 */
+  background-image: 
+    /* 1) 얇은 격자 무늬 */
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+    /* 2) 흑백 기하학적 도형 오버레이 (CSS 도형 트릭) */
+    radial-gradient(circle at 15% 20%, #19191920 50px, transparent 100px), /* 진한 원 */
+    linear-gradient(135deg, #FF000020 0%, #FF000000 50%), /* 빨간 선 */
+    radial-gradient(circle at 85% 70%, #8080FF20 120px, transparent 180px); /* 연보라색 흐릿한 원 */
+  background-size: 10px 10px, 10px 10px, 100% 100%, 100% 100%, 100% 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  margin: 60px 0 30px;
+  text-align: center;
+  color: #191919;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  position: relative;
+  display: inline-block;
+}
+
+/* 제목 아래의 상징적인 대각선 장식 */
+header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
+  width: 150px;
+  height: 8px;
+  background-color: #191919; /* 검은 굵은 대각선 느낌 */
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* 2. 💡 [핵심]: 2행 2열 바둑판식 구조 (CSS Grid) */
+#projects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  grid-template-rows: repeat(2, 1fr);    /* 2행 */
+  gap: 20px; /* 작품 사이 간격 */
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 60px;
+}
+
+/* 3. 개별 프로젝트 카드 디자인 */
+.project {
+  background-color: rgba(255, 255, 255, 0.95); /* 반투명 흰색 카드 */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease; /* 호버 효과를 위한 부드러운 전환 */
+  position: relative;
+}
+
+/* 각 카드의 조형미를 더해줄 모서리 색상 장식 */
+.project::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+}
+
+.project:hover {
+  transform: translateY(-5px) scale(1.02); /* 마우스 올리면 살짝 떠오름 */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: #191919;
+  padding: 40px 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.project .project-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.project .project-desc {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* 4. [데이터 영역]: 배치 순서 및 고유 색상 지정 */
+/* 💡 Grid Area를 이용해 원하는 행/열에 배치 */
+.project-sample1 { grid-area: 1 / 1; } /* 1행 1열 */
+.project-sample4 { grid-area: 1 / 2; } /* 1행 2열 */
+.project-sample2 { grid-area: 2 / 1; } /* 2행 1열 */
+.project-sample3 { grid-area: 2 / 2; } /* 2행 2열 */
+
+/* 각 카드의 시그니처 색상 (우측에 세로선으로 표시됨) */
+.project-sample1::after { background-color: #CCCCFF; } /* sample1 연보라 */
+.project-sample4::after { background-color: #8080FF; } /* sample4 보라 (우리 작품) */
+.project-sample2::after { background-color: #FFCC99; } /* sample2 연주황 */
+.project-sample3::after { background-color: #FFCCCC; } /* sample3 연분홍 */
