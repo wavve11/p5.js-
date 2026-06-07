@@ -1,12 +1,9 @@
-/* style.css - 칸딘스키 스타일 포트폴리오 대문 디자인 */
-
-/* 1. 전체적인 페이지 레이아웃 및 칸딘스키 배경 */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   
-  /* 칸딘스키 풍 배경: 도화지 질감 + 기하학적 오버레이 */
+
   background-color: #F0EEE9; /* 도화지색 */
   background-image: 
     /* 1) 얇은 격자 무늬 */
@@ -37,7 +34,7 @@ header h1 {
   display: inline-block;
 }
 
-/* 제목 아래의 상징적인 대각선 장식 */
+/* 제목 아래의 대각선 장식 */
 header h1::after {
   content: '';
   position: absolute;
@@ -46,7 +43,7 @@ header h1::after {
   transform: translateX(-50%) rotate(-5deg);
   width: 150px;
   height: 8px;
-  background-color: #191919; /* 검은 굵은 대각선 느낌 */
+  background-color: #191919; 
 }
 
 header p {
@@ -54,7 +51,7 @@ header p {
   opacity: 0.8;
 }
 
-/* 2. 💡 [핵심]: 2행 2열 바둑판식 구조 (CSS Grid) */
+/* 2행 2열 바둑판식 구조 (CSS Grid) */
 #projects {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2열 */
@@ -66,7 +63,7 @@ header p {
   margin-bottom: 60px;
 }
 
-/* 3. 개별 프로젝트 카드 디자인 */
+/* 개별 프로젝트 카드 디자인 */
 .project {
   background-color: rgba(255, 255, 255, 0.95); /* 반투명 흰색 카드 */
   border-radius: 15px;
@@ -91,69 +88,59 @@ header p {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 1. 카드 내부 정렬을 좌측으로 변경합니다. */
+/* 카드 내부 정렬을 좌측으로 변경합니다. */
 .project a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; /* 💡 기존 center에서 flex-start(좌측)로 변경 */
-  text-align: left;        /* 💡 텍스트를 좌측 정렬로 변경 */
+  align-items: flex-start; 
+  text-align: left;        
   text-decoration: none;
   color: #191919;
-  padding: 40px 30px;      /* 💡 좌측 정렬 시 답답해 보이지 않게 좌우 여백(30px)을 약간 늘림 */
+  padding: 40px 30px;      
   height: 100%;
   box-sizing: border-box;
 }
 
-/* (제목 부분은 그대로 두시면 됩니다) */
 .project .project-title {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* 2. 설명글의 가독성을 높이는 디테일 추가 */
 .project .project-desc {
   font-size: 0.9rem;
   opacity: 0.8;
-  line-height: 1.5;      /* 💡 줄 간격을 1.5배로 띄워 텍스트가 뭉쳐 보이지 않게 합니다. */
-  word-break: keep-all;  /* 💡 한국어 '단어' 단위로 줄을 바꿉니다. (예: '추상화'가 '추상\n화'로 끊기지 않음) */
+  line-height: 1.5;     
+  word-break: keep-all;  
 }
 
 /* 4. [데이터 영역]: 배치 순서 및 고유 색상 지정 */
-/* 💡 Grid Area를 이용해 원하는 행/열에 배치 */
+/* Grid Area를 이용해 원하는 행/열에 배치 */
 .project-sample1 { grid-area: 1 / 1; } /* 1행 1열 */
 .project-sample4 { grid-area: 1 / 2; } /* 1행 2열 */
 .project-sample2 { grid-area: 2 / 1; } /* 2행 1열 */
 .project-sample3 { grid-area: 2 / 2; } /* 2행 2열 */
 
-/* 각 카드의 시그니처 색상 (우측에 세로선으로 표시됨) */
+/* 각 카드의 시그니처 색상*/
 .project-sample1::after { background-color: #CCCCFF; } /* sample1 연보라 */
-.project-sample4::after { background-color: #8080FF; } /* sample4 보라 (우리 작품) */
+.project-sample4::after { background-color: #8080FF; } /* sample4 보라 */
 .project-sample2::after { background-color: #FFCC99; } /* sample2 연주황 */
 .project-sample3::after { background-color: #FFCCCC; } /* sample3 연분홍 */
 
-/* style.css 파일의 맨 아래에 추가하세요 */
-
-/* body 전체의 가상 요소를 사용하여 여백을 꾸밉니다. */
 body::before,
 body::after {
   content: '';
   position: fixed;
   top: 0;
-  width: 150px; /* 도형이 표시될 여백의 너비 */
+  width: 150px; 
   height: 100vh;
-  z-index: -1; /* 메인 콘텐츠 뒤에 배치 */
+  z-index: -1; 
 }
 
-/* 1단계: 좌측 여백 꾸미기 */
 body::before {
   left: 0;
-  /* 칸딘스키 스타일 도형들을 쌓아서 표현 (순서대로 아래에서 위로 쌓임)
-    1) 은은한 격자무늬 (기존 격자와 동일하게)
-    2) 진한 검은색 원 (좌측 하단)
-    3) 파란색 대각선 (좌측 상단에서 중앙으로)
-    4) 빨간색 삼각형 (좌측 중앙)
+  /* 칸딘스키 스타일 도형들을 쌓아서 표현
   */
   background-image: 
     linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
@@ -164,14 +151,9 @@ body::before {
   background-size: 10px 10px, 10px 10px, 100% 100%, 100% 100%, 100% 100%;
 }
 
-/* 2단계: 우측 여백 꾸미기 */
 body::after {
   right: 0;
   /* 칸딘스키 스타일 도형들을 쌓아서 표현
-    1) 은은한 격자무늬 (기존 격자와 동일하게)
-    2) 노란색 원 (우측 중앙)
-    3) 검은색 얇은 대각선 (우측 하단에서 중앙으로)
-    4) 연보라색 흐릿한 원 (우측 상단)
   */
   background-image: 
     linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
